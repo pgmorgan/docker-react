@@ -1,0 +1,22 @@
+# Docker Compose Version
+version:  '3'
+
+# Services = ~Containers
+services:
+  my-web-app:
+    build:
+      context:      ./
+      dockerfile:   ./Dockerfile.dev
+    ports:
+      - "3000:3000"
+    volumes:
+      - /home/node/node_modules
+      - ./:/home/node
+  tests:
+    build:
+      context:      ./
+      dockerfile:   ./Dockerfile.dev
+    volumes:
+      - /home/node/node_modules
+      - ./:/home/node
+    command: ["npm", "run", "test"] 
